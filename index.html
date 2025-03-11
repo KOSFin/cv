@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - Терминал</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Consolas', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .terminal {
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .line {
+            white-space: pre-wrap;
+        }
+        .input-line {
+            display: inline-block;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #fff;
+            animation: blink 0.8s steps(2, start) infinite;
+        }
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal" id="terminal">
+        <div class="line">Microsoft Windows [Version 10.0.19045.5487]</div>
+        <div class="line">(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.</div>
+        <div class="line"></div>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const commands = [
+            "C:\\WINDOWS\\system32> echo Загрузка данных...",
+            "Дмитрий Попов",
+            "Фуллстек веб-разработчик",
+            "#ReactJS #JavaScript #Python #Supabase #Firebase #WebDevelopment #Frontend #Backend #Vercel",
+            "________________________________________",
+            "Контакты:",
+            "• Email: dmitriy.popov.ofic@gmail.com",
+            "• Телефон: +7 932 306 9304",
+            "• Telegram: @parapopovich",
+            "• GitHub: https://github.com/KOSFin",
+            "________________________________________",
+            "Личные данные:",
+            "• Возраст: 16 лет",
+            "• Город: Магнитогорск (часовой пояс МСК+2)",
+            "• Готовность к переезду: В зависимости от места",
+            "________________________________________",
+            "Краткое описание:",
+            "Фуллстек веб-разработчик с опытом создания средних по сложности веб-сайтов и платформ...",
+            "________________________________________",
+        ];
+
+        let currentLine = 0;
+
+        function typeCommand(command, callback) {
+            let i = 0;
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('line');
+
+            const inputLine = document.createElement('span');
+            inputLine.classList.add('input-line');
+
+            const cursor = document.createElement('span');
+            cursor.classList.add('cursor');
+
+            lineDiv.appendChild(inputLine);
+            lineDiv.appendChild(cursor);
+
+            terminal.appendChild(lineDiv);
+
+            function typeChar() {
+                if (i < command.length) {
+                    inputLine.textContent += command[i];
+                    i++;
+                    setTimeout(typeChar, 50);
+                } else {
+                    cursor.remove();
+                    if (callback) callback();
+                }
+                terminal.scrollTop = terminal.scrollHeight; // Автопрокрутка
+            }
+
+            typeChar();
+        }
+
+        function executeCommands() {
+            if (currentLine < commands.length) {
+                typeCommand(commands[currentLine], () => {
+                    currentLine++;
+                    setTimeout(executeCommands, 500);
+                });
+            }
+        }
+
+        executeCommands();
+    </script>
+</body>
+</html>
