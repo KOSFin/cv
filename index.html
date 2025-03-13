@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Терминал: Дмитрий Попов</title>
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">Command Prompt - DEANONIM.exe</div>
+                <div class="terminal-controls">
+                    <div class="control minimize"></div>
+                    <div class="control maximize"></div>
+                    <div class="control close" id="closeButton"></div>
+                </div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-content" id="terminal">
+                    <div class="output">Microsoft Windows [Version 10.0.19045.3693]<br>(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hint">Подсказка: нажмите на крестик (×) для доступа к меню и пропуска анимаций</div>
+        
+        <div class="modal" id="exitModal">
+            <div class="modal-content">
+                <div class="modal-title">Меню</div>
+                <ul class="menu-options">
+                    <li class="menu-option" id="skipAnimations">Пропустить анимации и показать резюме</li>
+                    <li class="menu-option" id="restartAnimation">Перезапустить анимацию</li>
+                    <li class="menu-option" id="closeTerminal">Закрыть терминал</li>
+                </ul>
+                <div class="modal-buttons">
+                    <button class="modal-button" id="cancelExit">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="scripts/main.js"></script>
+    </body>
+</html>
